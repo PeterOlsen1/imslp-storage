@@ -14,7 +14,7 @@
                 if (!user) return;
 
                 dbClient.createUser(user);
-                // goto('/home');
+                goto('/home');
             }
             else {
                 throw new Error("Login failed, user is null");

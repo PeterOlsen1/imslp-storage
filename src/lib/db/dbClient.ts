@@ -10,6 +10,9 @@ export default class DbClient {
         return this.db;
     }
 
+    /**
+     * Create a new user in the database
+     */
     async createUser(user: User) {
         const uid = user.uid;
         const userData = {
@@ -30,6 +33,9 @@ export default class DbClient {
         return setDoc(doc(this.users, uid), userData);
     }
 
+    /**
+     * Get all data from a user
+     */
     async getUserData(uid: string): Promise<any | null> {
         const docSnapshot = await getDoc(doc(this.users, uid));
         if (docSnapshot.exists()) {
@@ -39,6 +45,9 @@ export default class DbClient {
         }
     }
 
+    /**
+     * Upload a new sheet to the user's collection 
+     */
     async addSheetToUser(uid: string, title: string, url: string) {
         if (!uid || !title || !url) {
             throw new Error("Invalid parameters: uid, title, and url are required");
@@ -63,6 +72,9 @@ export default class DbClient {
         return setDoc(userDoc, { sheets }, { merge: true });
     }
 
+    /**
+     * Delete a sheet from the user's collection
+     */
     async deleteSheetFromUser(uid: string, sheetTitle: string) {
         const userDoc = doc(this.users, uid);
         const userSnapshot = await getDoc(userDoc);
@@ -77,5 +89,48 @@ export default class DbClient {
         const updatedSheets = sheets.filter((sheet: any) => sheet.title !== sheetTitle);
         
         return setDoc(userDoc, { sheets: updatedSheets }, { merge: true });
+    }
+
+    /**
+     * Add a tag to a user's collection
+     */
+    async addTagToUser(uid: string, tag: string) {
+        if (!uid || !tag) {
+            throw new Error("Invalid parameters: uid and tag are required");
+        }
+
+        const userDoc = doc(this.users, uid);
+        const userSnapshot = await getDoc(userDoc);
+        
+        if (!userSnapshot.exists()) {
+            throw new Error("User does not exist");
+        }
+
+        const userData = userSnapshot.data();
+        const tags = userData.tags || [];
+        
+        if (!tags.includes(tag)) {
+            tags.push(tag);
+            return setDoc(userDoc, { tags }, { merge: true });
+        }
+    }
+
+    /**
+     * Delete a tag from a user's collection
+     */
+    async deleteTagFromUser(uid: string, tag: string) {
+        const userDoc = doc(this.users, uid);
+        const userSnapshot = await getDoc(userDoc);
+        
+        if (!userSnapshot.exists()) {
+            throw new Error("User does not exist");
+        }
+
+        const userData = userSnapshot.data();
+        const tags = userData.tags || [];
+        
+        const updatedTags = tags.filter((t: string) => t !== tag);
+        
+        return setDoc(userDoc, { tags: updatedTags }, { merge: true });
     }
 }
