@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* this works! */
+@theme {
+    --color-primary: rgb(0, 0, 0);
+    --color-secondary: #C7DAE5;
+    --color-tertiary: #c5e3c7;
+
+    --secondary-gradient: linear-gradient(30deg, #A3C4D7 0%, #E1EBF0 100%);
+    --tertiary-gradient: linear-gradient(330deg, #B8DCC1 0%, #E6F0E6 100%);
+
+
+}
+
+@function --secondary-gradient-custom($angle) {
+    result: linear-gradient($angle, #A3C4D7 0%, #E1EBF0 100%);
+}
+
+@function --tertiary-gradient-custom($angle) {
+    result: linear-gradient($angle, #B8DCC1 0%, #E6F0E6 100%);
+}
