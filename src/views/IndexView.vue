@@ -7,11 +7,13 @@
 
     const containerHeight = 18;
 
-    const scrollDiv = ref<HTMLElement | null>(null);
+    const scrollToDiv = ref<HTMLElement | null>(null);
     const scrollDown = () => {
         if (typeof window === 'undefined') return;
-        console.log(scrollDiv);
-        window.scrollBy({ top: window.innerHeight, left: 0, behavior: 'smooth' });
+
+        if (scrollToDiv?.value) {
+            scrollToDiv.value.scrollIntoView({ behavior: 'smooth' })
+        }
     };
 </script>
 
@@ -41,7 +43,6 @@
         <!-- middle banner -->
         <div class="text-center w-full pt-28 pb-22 gap-4 text-4xl font-800 flex flex-col justify-center items-center"
             style="background: var(--secondary-gradient);"
-            ref="scrollDiv"        
         >
             <div class="poppins color-[#111111]">
                 Reduce the tabs, store your music in one place.
@@ -76,7 +77,9 @@
                 </ul>
             </IndexCard>
         </div>
-        <div class="py-48 flex justify-center items-center flex-col gap-8" style="background: var(--tertiary-gradient);">
+        <div class="py-48 flex justify-center items-center flex-col gap-8" style="background: var(--tertiary-gradient);"
+            ref="scrollToDiv"
+        >
             <div class="text-3xl poppins">
                 Sign in with Google to get started
             </div>

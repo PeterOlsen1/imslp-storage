@@ -36,6 +36,5 @@
         <Button class="mt-4" @click="handleSubmit">
             Add Sheet
         </Button>
-        debug: {{  form.title }}
     </div>
 </template>
