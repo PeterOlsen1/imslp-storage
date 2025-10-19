@@ -1,16 +1,7 @@
-import { auth, usersRef } from "./firebase";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, type Auth } from 'firebase/auth';
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(auth: Auth) {
     const provider = new GoogleAuthProvider();
-    try {
-        const result = await signInWithPopup(auth, provider);
-        return result.user;
-    } catch (error) {
-        throw error;
-    }
-}
-
-export function getUser() {
-    return auth.currentUser;
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
 }

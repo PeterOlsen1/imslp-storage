@@ -1,10 +1,26 @@
 <script setup>
     // do firebase stuff up here
     import { signInWithGoogle } from '@/scripts/auth';
+    import { useFirebaseAuth } from 'vuefire';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
+    const auth = useFirebaseAuth();
+    
+    const handleClick = async () => {
+        try {
+            const user = await signInWithGoogle(auth);
+            if (user) {
+                router.push("/home");
+            }
+        } catch (error) {
+            console.error('Error during sign-in:', error);
+        }
+    };
 </script>
 
 <template>
-    <button type="button" class="login-with-google-btn" @click="signInWithGoogle">
+    <button type="button" class="login-with-google-btn" @click="handleClick">
         Sign in with Google
     </button>
 </template>
