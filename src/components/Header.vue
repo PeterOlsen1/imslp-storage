@@ -1,5 +1,5 @@
 <script setup>
-
+    import Button from './lib/Button.vue';
 </script>
 
 <template>
@@ -14,12 +14,12 @@
             </span>
         </router-link>
         <div class="flex-1 text-center poppins text-lg self-center flex justify-end pr-8 gap-4">
-            <button class="bg-black text-white text-sm px-4 py-2 rounded-md cursor-pointer">
+            <Button>
                 Log Out
-            </button>
-            <button class="bg-black text-white text-sm px-4 py-2 rounded-md cursor-pointer">
+            </Button>
+            <Button>
                 Profile
-            </button>
+            </Button>
         </div>
     </div>
 </template>
