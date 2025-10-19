@@ -47,7 +47,16 @@
                     </div>
                 </div>
                 <div class="flex flex-col gap-4 flex-1 max-w-4xl">
-                    <h2 class="text-xl font-semibold mb-4">your sheets</h2>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                            width="20" height="20" viewBox="0 0 612 612" xml:space="preserve">
+                            <g>
+                                <path d="M404.814,0H60.736v612h490.527V153L404.814,0z M402.979,79.292l83.433,81.913h-83.433V79.292L402.979,79.292z
+                                    M497.102,554.625H114.898V57.375h237.719v155.788h144.484V554.625z"/>
+                            </g>
+                        </svg>
+                        <h2 class="text-xl font-semibold">your sheets</h2>
+                    </div>
                     <SheetsDisplay :sheets="sheets" />
                 </div>
             </div>
