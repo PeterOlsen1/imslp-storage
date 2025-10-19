@@ -1,7 +1,7 @@
 <script setup>
     import Header from '@/components/Header.vue';
     import AddSheetForm from '@/components/AddSheetForm.vue';
-    import Sheet from '@/components/Sheet.vue';
+    import SheetsDisplay from '@/components/SheetsDisplay.vue';
     import { useCurrentUser } from 'vuefire';
 
     const user = useCurrentUser();
@@ -12,7 +12,7 @@
         <Header />
         <div class="mt-16 mx-auto">
             <div class="font-semibold text-3xl mb-12">
-                welcome back, {{ user.displayName.split(' ')[0] }}!
+                welcome back{{ user ? ', '+ user.displayName?.split(' ')[0] + '!' : '!' }}
             </div>
             <div class="flex gap-8 w-full">
                 <div>
@@ -21,8 +21,7 @@
                 </div>
                 <div class="flex flex-col gap-4 flex-1">
                     <h2 class="text-xl font-semibold mb-4">your sheets</h2>
-                    <Sheet title="Rach 3" composer="Rachmaninoff" />
-                    <Sheet title="Rachmaninoff 3rd piano concerto" composer="Rachmaninoff" />
+                    <SheetsDisplay />
                 </div>
                 <div class="flex flex-col gap-4">
                     <h2 class="text-xl font-semibold mb-4">filters</h2>
