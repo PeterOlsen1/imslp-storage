@@ -3,7 +3,10 @@
 import GoogleLogin from '@/components/GoogleLogin.vue'
 //@ts-ignore
 import IndexCard from '@/components/IndexCard.vue'
+//@ts-ignore
+import Button from '@/components/lib/Button.vue'
 import { ref } from 'vue'
+import { useCurrentUser } from 'vuefire'
 
 const containerHeight = 18
 
@@ -15,13 +18,17 @@ const scrollDown = () => {
     scrollToDiv.value.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const user = useCurrentUser()
 </script>
 
 <!-- dynamically set classes with :class="{javascript}" -->
 <template>
   <div :class="`w-screen min-h-screen flex justify-center flex-col align-center overflow-x-hidden`">
     <!-- top card -->
-    <div class="flex justify-center gap-2 sm:gap-24 flex-col sm:flex-row mt-[16vh] mb-[16vh]">
+    <div
+      class="flex justify-center gap-2 flex-col items-center sm:items-stretch sm:gap-24 sm:flex-row mt-[16vh] mb-[16vh]"
+    >
       <!-- left -->
       <div
         class="text-center text-5xl flex items-center"
@@ -89,13 +96,25 @@ const scrollDown = () => {
         </ul>
       </IndexCard>
     </div>
+
+    <!-- bottom action container -->
     <div
       class="py-48 flex justify-center items-center flex-col gap-8"
       style="background: var(--tertiary-gradient)"
       ref="scrollToDiv"
     >
-      <div class="text-3xl poppins">Sign in with Google to get started</div>
-      <GoogleLogin />
+      <div v-if="user">
+        <div class="flex justify-center flex-col gap-4 text-center">
+          <div class="text-3xl poppins">Return home and resume your journey</div>
+          <router-link to="/home" class="mx-auto">
+            <Button> Home </Button>
+          </router-link>
+        </div>
+      </div>
+      <div v-else>
+        <div class="text-3xl poppins">Sign in with Google to get started</div>
+        <GoogleLogin />
+      </div>
     </div>
   </div>
 </template>

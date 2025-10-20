@@ -5,9 +5,13 @@
   --color-primary: rgb(0, 0, 0);
   --color-secondary: #c7dae5;
   --color-tertiary: #c5e3c7;
+  /* --color-footer: #1c232e; */
+  --color-footer: #27303d;
+  --color-link-hover: rgba(200, 200, 200, 0.2);
 
   --secondary-gradient: linear-gradient(30deg, #a3c4d7 0%, #e1ebf0 100%);
   --tertiary-gradient: linear-gradient(330deg, #b8dcc1 0%, #e6f0e6 100%);
+  --footer-gradient: linear-gradient(120deg, #27303d 0%, #343c4a 100%);
 }
 
 @function --secondary-gradient-custom($angle) {
