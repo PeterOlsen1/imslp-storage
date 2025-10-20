@@ -3,11 +3,17 @@ import { usersRef } from './firebase'
 import type { Sheet } from '@/types/sheet'
 
 export function getUserSheetsCollection(userId: string) {
+  if (!userId) {
+    return null;
+  }
   return collection(usersRef, userId, 'sheets')
 }
 
 export async function addUserSheet(userId: string, sheetData: Sheet) {
   const userSheetsRef = getUserSheetsCollection(userId)
+  if (!userSheetsRef) {
+    return null;
+  }
   try {
     const docRef = await addDoc(userSheetsRef, sheetData)
     return docRef
@@ -17,8 +23,12 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
   }
 }
 
-export async function getUserSheets(userId: string): Promise<Sheet[]> {
-  const userSheetsRef = getUserSheetsCollection(userId)
+export async function getUserSheets(userId: string): Promise<Sheet[]|null> {
+  const userSheetsRef = getUserSheetsCollection(userId);
+  if (!userSheetsRef) {
+    return null;
+  }
+
   const out: Sheet[] = []
   const docs = await getDocs(userSheetsRef)
   docs.forEach((d) => {

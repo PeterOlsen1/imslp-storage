@@ -5,21 +5,20 @@ import SheetsDisplay from '@/components/SheetsDisplay.vue'
 import SheetFilters from '@/components/SheetFilters.vue'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { watch } from 'vue'
+import { watch, watchEffect } from 'vue'
 
 let sheets
 
-const user = useCurrentUser()
-watch(user, (newUser) => {
-  if (newUser?.uid) {
-    sheets = useCollection(getUserSheetsCollection(newUser.uid))
+const user = useCurrentUser();
+watchEffect(() => {
+  if (user.value?.uid) {
+    sheets = useCollection(getUserSheetsCollection(user.value.uid))
   }
 })
 </script>
 
 <template>
   <div class="w-screen min-h-screen flex flex-col align-center overflow-x-hidden">
-    <Header />
     <div class="mt-16 mx-8">
       <div class="font-semibold text-3xl mb-12">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}

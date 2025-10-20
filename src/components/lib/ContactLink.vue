@@ -40,13 +40,13 @@ defineProps({
 <template>
   <div
     class="cursor-pointer p-1 select-none rounded-md hover:bg-link-hover transition-all duration-200"
+    @mouseover="onOver"
+    @mouseout="onOut"
   >
     <a
       :href="url"
       target="_blank"
       class="flex gap-2 items-center"
-      @mouseover="onOver"
-      @mouseout="onOut"
     >
       <img :src="img" :alt="name" width="25" height="20" class="filter invert" />
       <div class="name-text" ref="nameTextRef">
