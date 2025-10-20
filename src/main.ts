@@ -1,5 +1,5 @@
 import './assets/main.css'
-import "./assets/tailwind.css"
+import './assets/tailwind.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -12,9 +12,7 @@ const app = createApp(App)
 // https://vuefire.vuejs.org/guide/getting-started.html
 app.use(VueFire, {
   firebaseApp,
-  modules: [
-    VueFireAuth(),
-  ],
+  modules: [VueFireAuth()],
 })
 
 app.use(router)

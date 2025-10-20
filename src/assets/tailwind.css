@@ -1,21 +1,19 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* this works! */
 @theme {
-    --color-primary: rgb(0, 0, 0);
-    --color-secondary: #C7DAE5;
-    --color-tertiary: #c5e3c7;
+  --color-primary: rgb(0, 0, 0);
+  --color-secondary: #c7dae5;
+  --color-tertiary: #c5e3c7;
 
-    --secondary-gradient: linear-gradient(30deg, #A3C4D7 0%, #E1EBF0 100%);
-    --tertiary-gradient: linear-gradient(330deg, #B8DCC1 0%, #E6F0E6 100%);
-
-
+  --secondary-gradient: linear-gradient(30deg, #a3c4d7 0%, #e1ebf0 100%);
+  --tertiary-gradient: linear-gradient(330deg, #b8dcc1 0%, #e6f0e6 100%);
 }
 
 @function --secondary-gradient-custom($angle) {
-    result: linear-gradient($angle, #A3C4D7 0%, #E1EBF0 100%);
+  result: linear-gradient($angle, #a3c4d7 0%, #e1ebf0 100%);
 }
 
 @function --tertiary-gradient-custom($angle) {
-    result: linear-gradient($angle, #B8DCC1 0%, #E6F0E6 100%);
+  result: linear-gradient($angle, #b8dcc1 0%, #e6f0e6 100%);
 }

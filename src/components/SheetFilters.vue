@@ -1,16 +1,14 @@
 <script setup lang="ts">
-    import type { Sheet } from '@/types/sheet';
+import type { Sheet } from '@/types/sheet'
 
-    defineProps({
-        data: {
-            type: Array as () => Sheet[],
-            required: true
-        }
-    });
+defineProps({
+  data: {
+    type: Array as () => Sheet[],
+    required: true,
+  },
+})
 </script>
 
 <template>
-    <div>
-        
-    </div>
+  <div></div>
 </template>

@@ -7,6 +7,4 @@ import { RouterView } from 'vue-router'
 </template>
 
 <!-- Scoped: styles apply to current component only -->
-<style scoped>
-
-</style>
+<style scoped></style>
