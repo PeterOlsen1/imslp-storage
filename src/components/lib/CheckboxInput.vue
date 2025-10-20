@@ -12,12 +12,16 @@ defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="flex gap-2">
     <input
       type="checkbox"
-      v-bind="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      :id="`checkbox-${label}`"
+      v-bind="$attrs"
+      :checked="modelValue"
+      @change="$emit('update:modelValue', $event.target.checked)"
     />
-    <div>hello</div>
+    <label :for="`checkbox-${label}`">
+      {{ label }}
+    </label>
   </div>
 </template>

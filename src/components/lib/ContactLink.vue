@@ -48,7 +48,7 @@ defineProps({
       target="_blank"
       class="flex gap-2 items-center"
     >
-      <img :src="img" :alt="name" width="25" height="20" class="filter invert" />
+      <img :src="img" :alt="name" width="20" height="17" class="filter invert" />
       <div class="name-text" ref="nameTextRef">
         {{ name }}
         <div class="underline w-0 h-[1px] bg-white transition-all duration-200"></div>

@@ -1,20 +1,24 @@
-<script setup>
+<script setup lang="ts">
 import Header from '@/components/Header.vue'
 import AddSheetForm from '@/components/AddSheetForm.vue'
 import SheetsDisplay from '@/components/SheetsDisplay.vue'
 import SheetFilters from '@/components/SheetFilters.vue'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { watch, watchEffect } from 'vue'
+import { reactive, watch, watchEffect } from 'vue'
+import type { Filter } from '@/types/filter'
+import type { Sheet } from '@/types/sheet'
 
-let sheets
+let sheets: Sheet[];
 
 const user = useCurrentUser();
 watchEffect(() => {
   if (user.value?.uid) {
-    sheets = useCollection(getUserSheetsCollection(user.value.uid))
+    sheets = useCollection(getUserSheetsCollection(user.value.uid)) as any;
   }
-})
+});
+
+const filters = reactive<Filter[]>([]);
 </script>
 
 <template>
@@ -44,7 +48,7 @@ watchEffect(() => {
             <AddSheetForm />
           </div>
           <div>
-            <div class="flex items-center gap-2 mb-4">
+            <div class="flex items-center gap-2 mb-1">
               <svg
                 width="20"
                 height="20"
@@ -64,7 +68,7 @@ watchEffect(() => {
               </svg>
               <h2 class="text-xl font-semibold">filters</h2>
             </div>
-            <SheetFilters />
+            <SheetFilters :data="sheets" :filters="filters"/>
           </div>
         </div>
         <div class="flex flex-col gap-4 flex-1 max-w-4xl">
