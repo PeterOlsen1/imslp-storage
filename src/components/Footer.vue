@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import ContactLink from './lib/ContactLink.vue'
-
-const personalSiteRef = <HTMLDivElement | null>ref(null)
 </script>
 
 <template>
@@ -31,7 +28,11 @@ const personalSiteRef = <HTMLDivElement | null>ref(null)
           img="https://cdn-icons-png.flaticon.com/512/25/25231.png"
         />
         <div>|</div>
-        <div>Github</div>
+        <ContactLink
+          name="Personal Site"
+          url="http://peterolsen.org"
+          img="https://peterolsen.org/favicon.ico"
+        />
       </div>
     </div>
   </div>
