@@ -14,10 +14,10 @@ const form = reactive({
 })
 
 const handleSubmit = async () => {
-  if (!user || !user._rawValue.uid) {
+  if (!user.value || !user.value.uid) {
     return
   }
-  const res = await addUserSheet(user._rawValue.uid, form)
+  const res = await addUserSheet(user.value.uid, { ...form })
   if (!res) {
     console.log('sheet add failed')
   } else {

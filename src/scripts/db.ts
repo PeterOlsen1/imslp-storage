@@ -14,6 +14,12 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
   if (!userSheetsRef) {
     return null;
   }
+
+  if (!sheetData.composer || sheetData.title || sheetData.url) {
+    console.error("Missing data!");
+    return null;
+  }
+  
   try {
     const docRef = await addDoc(userSheetsRef, sheetData)
     return docRef
