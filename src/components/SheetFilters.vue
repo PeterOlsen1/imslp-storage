@@ -2,7 +2,7 @@
   import type { Sheet } from '@/types/sheet'
   import type { Filter } from '@/types/filter';
   import CheckboxInput from './lib/CheckboxInput.vue';
-  import { watch, reactive, effect } from 'vue';
+  import { watch, reactive, effect, defineEmits } from 'vue';
 
   const props = defineProps({
     data: {
@@ -13,13 +13,14 @@
       type: Array as () => Filter[],
       required: true,
     }
-  })
+  });
+
+  const emit = defineEmits(['update']);
 
   let filters = reactive<Filter[]>([]);
 
   //update filters on data change
   effect(() => {
-    console.log('running effect');
     const data = props.data;
     if (!data) return;
 
@@ -41,8 +42,8 @@
   });
 
   watch(filters, () => {
-    console.log(filters.map(f => f.state));
-  })
+    emit('update', filters.filter(f => f.state).map(f => f.label));
+  });
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup>
 import Button from './lib/Button.vue'
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     required: true,
@@ -10,7 +10,15 @@ defineProps({
     type: String,
     required: true,
   },
-})
+  url: {
+    type: String,
+    required: true,
+  },
+});
+
+function redirect() {
+  window.open(props.url, '_blank')
+}
 </script>
 
 <template>
@@ -27,7 +35,9 @@ defineProps({
       </div>
     </div>
     <div class="flex-1 flex justify-end">
-      <Button class="w-max my-auto"> View Sheet </Button>
+      <Button class="w-max my-auto" @click="redirect"> 
+        View Sheet 
+      </Button>
     </div>
   </div>
 </template>

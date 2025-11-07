@@ -1,8 +1,5 @@
 <script setup lang="ts">
-//@ts-ignore
-import GoogleLogin from '@/components/GoogleLogin.vue'
-//@ts-ignore
-import IndexCard from '@/components/IndexCard.vue'
+import { GoogleLogin, IndexCard } from '@/components'
 //@ts-ignore
 import Button from '@/components/lib/Button.vue'
 import { ref } from 'vue'

@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
-import AddSheetForm from '@/components/AddSheetForm.vue'
-import SheetsDisplay from '@/components/SheetsDisplay.vue'
-import SheetFilters from '@/components/SheetFilters.vue'
+import { Col, HomeLayout, Row } from '@/components/layouts'
+import { AddSheetForm, SheetFilters, SheetsDisplay } from '@/components'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { reactive, watch, watchEffect } from 'vue'
+import { reactive, watch, watchEffect, ref } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 
-let sheets: Sheet[];
+const user = useCurrentUser()
+const sheets = ref<Sheet[]>([])
 
-const user = useCurrentUser();
 watchEffect(() => {
   if (user.value?.uid) {
-    sheets = useCollection(getUserSheetsCollection(user.value.uid)) as any;
+    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as any;
+  } else {
+    sheets.value = []
   }
-});
+})
 
 const filters = reactive<Filter[]>([]);
+watch(filters, () => {
+  console.log(filters)
+})
 </script>
 
 <template>
@@ -27,10 +30,10 @@ const filters = reactive<Filter[]>([]);
       <div class="font-semibold text-3xl mb-12">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}
       </div>
-      <div class="gap-8 w-full grid grid-cols-1 md:grid-cols-[1fr_4fr]">
-        <div class="flex flex-col gap-4 min-w-48">
-          <div>
-            <div class="flex items-center gap-2 mb-4">
+      <HomeLayout>
+        <Col gap="4" class="min-w-48">
+          <Col>
+            <Row class="mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -44,11 +47,11 @@ const filters = reactive<Filter[]>([]);
                 ></path>
               </svg>
               <h2 class="text-xl font-semibold">add new sheet</h2>
-            </div>
+            </Row>
             <AddSheetForm />
-          </div>
-          <div>
-            <div class="flex items-center gap-2 mb-1">
+          </Col>
+          <Col>
+            <Row class="mb-1">
               <svg
                 width="20"
                 height="20"
@@ -67,12 +70,12 @@ const filters = reactive<Filter[]>([]);
                 <path d="M10 12.261L4.028 3.972h16L14 12.329V17l-4 3z" />
               </svg>
               <h2 class="text-xl font-semibold">filters</h2>
-            </div>
-            <SheetFilters :data="sheets" :filters="filters"/>
-          </div>
-        </div>
-        <div class="flex flex-col gap-4 flex-1 max-w-4xl">
-          <div class="flex items-center gap-2 mb-4">
+            </Row>
+            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters = f"/>
+          </Col>
+        </Col>
+        <Col gap="4" class="flex-1 max-w-4xl">
+          <Row class="mb-4">
             <svg
               fill="#000000"
               version="1.1"
@@ -92,10 +95,10 @@ const filters = reactive<Filter[]>([]);
               </g>
             </svg>
             <h2 class="text-xl font-semibold">your sheets</h2>
-          </div>
-          <SheetsDisplay :sheets="sheets" />
-        </div>
-      </div>
+          </Row>
+          <SheetsDisplay :sheets="sheets.value" />
+        </Col>
+      </HomeLayout>
     </div>
   </div>
 </template>
