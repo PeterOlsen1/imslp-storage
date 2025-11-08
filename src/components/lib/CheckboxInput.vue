@@ -18,9 +18,10 @@ defineProps({
       :id="`checkbox-${label}`"
       v-bind="$attrs"
       :checked="modelValue"
+      class="cursor-pointer"
       @change="$emit('update:modelValue', $event.target.checked)"
     />
-    <label :for="`checkbox-${label}`">
+    <label :for="`checkbox-${label}`" class="cursor-pointer">
       {{ label }}
     </label>
   </div>

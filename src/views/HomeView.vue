@@ -70,7 +70,7 @@ const filters = ref<Filter[]>([]);
               </svg>
               <h2 class="text-xl font-semibold">filters</h2>
             </Row>
-            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters.value = f"/>
+            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters.value = f || []"/>
           </Col>
         </Col>
         <Col gap="4" class="flex-1 max-w-4xl">
@@ -96,14 +96,14 @@ const filters = ref<Filter[]>([]);
             <h2 class="text-xl font-semibold">your sheets</h2>
           </Row>
           <Row class="font-light">
-            <div v-if="filters.value.length == 0">
+            <div v-if="!filters.value || filters.value.length == 0">
               no filters
             </div>
             <div v-else>
               filters: {{ filters.value.join(', ') }}
             </div>
           </Row>
-          <SheetsDisplay :sheets="sheets.value" />
+          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" />
         </Col>
       </HomeLayout>
     </div>
