@@ -4,11 +4,9 @@ defineProps({
     type: String,
     required: false,
   },
-  modelValue: {
-    type: String,
-    required: false,
-  },
 })
+
+const model = defineModel();
 </script>
 
 <template>
@@ -18,7 +16,7 @@ defineProps({
       type="text"
       class="border border-gray-300 rounded-md p-2 w-full outline-none"
       v-bind="$attrs"
-      @input="$emit('update:modelValue', $event.target.value)"
+      v-model="model"
     />
   </div>
 </template>

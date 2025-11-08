@@ -15,7 +15,7 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
     return null;
   }
 
-  if (!sheetData.composer || sheetData.title || sheetData.url) {
+  if (!sheetData.composer || !sheetData.title || !sheetData.url) {
     console.error("Missing data!");
     return null;
   }
