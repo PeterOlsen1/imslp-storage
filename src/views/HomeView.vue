@@ -18,10 +18,7 @@ watchEffect(() => {
   }
 })
 
-const filters = reactive<Filter[]>([]);
-watch(filters, () => {
-  console.log(filters)
-})
+const filters = ref<Filter[]>([]);
 </script>
 
 <template>
@@ -29,6 +26,8 @@ watch(filters, () => {
     <div class="mt-16 mx-8">
       <div class="font-semibold text-3xl mb-12">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}
+      </div>
+      <div>
       </div>
       <HomeLayout>
         <Col gap="4" class="min-w-48">
@@ -71,11 +70,11 @@ watch(filters, () => {
               </svg>
               <h2 class="text-xl font-semibold">filters</h2>
             </Row>
-            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters = f"/>
+            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters.value = f"/>
           </Col>
         </Col>
         <Col gap="4" class="flex-1 max-w-4xl">
-          <Row class="mb-4">
+          <Row>
             <svg
               fill="#000000"
               version="1.1"
@@ -95,6 +94,14 @@ watch(filters, () => {
               </g>
             </svg>
             <h2 class="text-xl font-semibold">your sheets</h2>
+          </Row>
+          <Row class="font-light">
+            <div v-if="filters.value.length == 0">
+              no filters
+            </div>
+            <div v-else>
+              filters: {{ filters.value.join(', ') }}
+            </div>
           </Row>
           <SheetsDisplay :sheets="sheets.value" />
         </Col>
