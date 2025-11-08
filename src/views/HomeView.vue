@@ -103,7 +103,7 @@ const filters = ref<Filter[]>([]);
               filters: {{ filters.value.join(', ') }}
             </div>
           </Row>
-          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" />
+          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" :page-len=3 />
         </Col>
       </HomeLayout>
     </div>
