@@ -2,6 +2,7 @@
   import type { Sheet } from '@/types/sheet'
   import type { Filter } from '@/types/filter';
   import { CheckboxInput } from './lib';
+  import { Row } from './layouts';
   import { watch, reactive, effect, defineEmits } from 'vue';
 
   const props = defineProps({
@@ -25,15 +26,18 @@
     if (!data) return;
 
     const out = new Set<string>();
+    const freqs: Record<string, number> = {};
     for (const sheet of data) {
       out.add(sheet.composer);
+      freqs[sheet.composer] = (freqs[sheet.composer] || 0) + 1;
     }
 
     const newFilters: Filter[] = [];
     for (const filter of out) {
       newFilters.push({
         state: false,
-        label: filter
+        label: filter,
+        frequency: freqs[filter] || 0,
       });
     }
 
@@ -51,6 +55,11 @@
     composer
   </div>
   <div v-for="f in filters" class="flex flex-col gap-2">
-    <CheckboxInput :label="f.label" v-model="f.state"/>
+    <Row>
+      <CheckboxInput :label="f.label" v-model="f.state"/>
+      <div class="font-light">
+        ({{ f.frequency }})
+      </div>
+    </Row>
   </div>
 </template>
