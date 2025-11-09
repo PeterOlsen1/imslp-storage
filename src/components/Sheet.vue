@@ -6,6 +6,7 @@ import { Row } from './layouts';
 import { ref, type PropType } from 'vue';
 import { SheetModal } from '@/components';
 import type { Sheet } from '@/types/sheet';
+import { Subtitle, Italic } from './ui';
 
 const props = defineProps({
   sheet: {
@@ -30,12 +31,12 @@ function redirect() {
     class="flex p-4 rounded-md shadow-md gap-6 justify-center"
   >
     <div class="flex flex-col gap-2">
-      <div class="font-semibold text-xl poppins">
+      <Subtitle class="poppins">
         {{ props.sheet.title }}
-      </div>
-      <div class="text-sm italic poppins">
+      </Subtitle>
+      <Italic>
         {{ props.sheet.composer }}
-      </div>
+      </Italic>
     </div>
     <Row class="flex-1 justify-end">
       <Button class="my-auto"

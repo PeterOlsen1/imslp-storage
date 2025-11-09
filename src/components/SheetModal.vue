@@ -1,6 +1,8 @@
 <script setup lang="ts">
-    import { onMounted, onUnmounted, type PropType } from 'vue'
+    import { onMounted, onUnmounted, type PropType } from 'vue';
+    import { Subtitle, Italic } from './ui';
     import type { Sheet } from '@/types/sheet';
+    import { Col } from './layouts';
 
     onMounted(() => {
         document.body.style.overflow = 'hidden';
@@ -28,9 +30,14 @@
         <Col class="p-24 bg-white rounded z-51 place-items-start"
             @click.stop
         >
-            <div>
-                hello, modal
-            </div>
+            <Col gap="0">
+                <Subtitle>
+                    {{ sheet.title }}
+                </Subtitle>
+                <Small>
+                    {{ sheet.composer }}
+                </Small>
+            </Col>
         </Col>
     </div>
 </template>
