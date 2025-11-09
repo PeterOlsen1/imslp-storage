@@ -5,6 +5,7 @@ import type { Sheet as SheetType } from '@/types/sheet'
 import { computed, effect, watch, ref } from 'vue'
 import { Col, Row } from '@/components/layouts'
 import { Arrow } from '@/components/lib/svg'
+import type { Timestamp } from 'firebase/firestore'
 
 interface Props {
   sheets: SheetType[]
@@ -14,16 +15,25 @@ interface Props {
 const props = defineProps<Props>()
 
 const filteredSheets = computed(() => {
-  if (!props.filters || !props.filters.length) return props.sheets
+  let result = Array.isArray(props.sheets) ? props.sheets : [];
+  if (props.filters && props.filters.length) {
+    result = result.filter((sheet) => props.filters.includes(sheet.composer));
+  }
 
-  return props.sheets.filter((sheet) => props.filters.includes(sheet.composer))
-})
+  return result.slice().sort((a, b) => {
+    //@ts-ignore
+    const aTime = a.lastAccessed ? a.lastAccessed.toDate().getTime() : 0;
+    //@ts-ignore
+    const bTime = b.lastAccessed ? b.lastAccessed.toDate().getTime() : 0;
+    return bTime - aTime;
+  });
+});
 
 const pagedSheets = computed(() => {
   const start = pageIdx.value * props.pageLen
   const end = start + props.pageLen
   return filteredSheets.value.slice(start, end)
-})
+});
 
 let pageIdx = ref(0)
 const pages = computed(() => {
@@ -32,7 +42,7 @@ const pages = computed(() => {
     out.push(i)
   }
   return out
-})
+});
 
 watch([filteredSheets, () => props.pageLen], () => {
   const maxPage = pages.value.length > 0 ? pages.value[pages.value.length - 1] : 0
@@ -57,7 +67,7 @@ watch([filteredSheets, () => props.pageLen], () => {
         <Arrow
           class="cursor-pointer"
           style="transform: scaleX(-1)"
-          @click="pageIdx != 0 ? pageIdx-- : (pageIdx = pages[pages.length - 1])"
+          @click="pageIdx != 0 ? pageIdx-- : (pageIdx = pages[pages.length - 1] || 0)"
         />
         <div
           v-for="page in pages"
