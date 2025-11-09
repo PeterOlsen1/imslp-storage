@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, doc, getDoc, setDoc } from 'firebase/firestore'
+import { collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
 import { usersRef } from './firebase'
 import type { Sheet } from '@/types/sheet'
 
@@ -45,6 +45,34 @@ export async function getUserSheets(userId: string): Promise<Sheet[] | null> {
   })
 
   return out
+}
+
+export async function updateSheet(userId: string, sheetId: string, data: Sheet) {
+  const userSheetsRef = getUserSheetsCollection(userId)
+  if (!userSheetsRef) {
+    return false
+  }
+
+  const docRef = doc(userSheetsRef, sheetId)
+  try {
+    await setDoc(docRef, {
+      ...data,
+    })
+    return true
+  } catch {
+    console.error('Error setting last accessed time!')
+    return false
+  }
+}
+
+export async function deleteSheet(userId: string, sheetId: string) {
+  const userSheetsRef = getUserSheetsCollection(userId)
+  if (!userSheetsRef) {
+    return false
+  }
+
+  const docRef = doc(userSheetsRef, sheetId)
+  return deleteDoc(docRef)
 }
 
 export async function updateRecentlyViewed(userId: string, sheetId: string) {

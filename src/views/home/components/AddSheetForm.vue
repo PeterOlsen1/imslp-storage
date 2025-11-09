@@ -31,7 +31,6 @@ const handleSubmit = async () => {
 
   const res = await addUserSheet(user.value.uid, { ...form })
   if (!res) {
-    console.error('sheet add failed')
     fireErrorToast({
       text: 'Unexpected error adding sheet. Try again later',
     })
@@ -50,7 +49,7 @@ const handleSubmit = async () => {
   <div class="flex flex-col gap-2">
     <TextInput v-model="form.title" label="Title" />
     <TextInput v-model="form.composer" label="Composer" />
-    <TextInput v-model="form.url" label="URL" type="url" />
+    <TextInput v-model="form.url" label="URL" type="url" @keyup.enter="handleSubmit" />
     <Button class="mt-4" @click="handleSubmit"> Add Sheet </Button>
   </div>
 </template>

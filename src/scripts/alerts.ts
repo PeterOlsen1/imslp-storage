@@ -47,3 +47,18 @@ export function fireSuccessToast(input: { title?: string; text?: string }) {
     color: '#fff',
   })
 }
+
+export function fireConfirmation(input?: { title?: string; text?: string }) {
+  return Swal.fire({
+    title: input?.title || 'Are you sure?',
+    text: input?.text || 'This action cannot be undone.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'Cancel',
+    cancelButtonColor: 'black',
+    confirmButtonColor: 'black',
+    background: '#fff',
+    color: '#111',
+  })
+}
