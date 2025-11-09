@@ -2,7 +2,7 @@
 import { Col, HomeLayout, Row } from '@/components/layouts'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { watchEffect, ref } from 'vue'
+import { watchEffect, ref, toValue } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 import { Select } from '@/components/lib/inputs'
@@ -15,7 +15,7 @@ const sheets = ref<Sheet[]>([])
 
 watchEffect(() => {
   if (user.value?.uid) {
-    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as unknown as Sheet[]
+    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as any;
   } else {
     sheets.value = []
   }
@@ -74,7 +74,7 @@ const pageLen = ref<number>(10)
               <Subtitle>filters</Subtitle>
             </Row>
             <SheetFilters
-              :data="sheets"
+              :data="toValue(sheets)"
               :filters="filters"
               @update="(f) => (filters = f || [])"
             />
@@ -122,7 +122,7 @@ const pageLen = ref<number>(10)
             </Row>
           </Row>
           <SheetsDisplay
-            :sheets="sheets"
+            :sheets="toValue(sheets)"
             :filters="filters.map(f => f.label) || []"
             :page-len="pageLen"
           />

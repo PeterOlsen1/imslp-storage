@@ -5,16 +5,11 @@ import { Checkbox } from '@/components/lib/inputs'
 import { Row } from '@/components/layouts'
 import { watch, reactive, effect } from 'vue'
 
-const props = defineProps({
-  data: {
-    type: Array as () => Sheet[], //weird typing
-    required: true,
-  },
-  filters: {
-    type: Array as () => Filter[],
-    required: true,
-  },
-})
+interface Props {
+  data: Sheet[],
+  filters: Filter[]
+}
+const props = defineProps<Props>();
 
 const emit = defineEmits(['update'])
 
@@ -22,11 +17,11 @@ let filters = reactive<Filter[]>([])
 
 //update filters on data change
 effect(() => {
-  const data = props.data
-  if (!data) return
+  const data = props.data;
+  if (!data || !data.length) return
 
   const out = new Set<string>()
-  const freqs: Record<string, number> = {}
+  const freqs: Record<string, number> = {};
   for (const sheet of data) {
     out.add(sheet.composer)
     freqs[sheet.composer] = (freqs[sheet.composer] || 0) + 1
