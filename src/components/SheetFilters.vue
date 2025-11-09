@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { Sheet } from '@/types/sheet'
   import type { Filter } from '@/types/filter';
-  import { CheckboxInput } from './lib';
+  import { Checkbox } from './lib/inputs';
   import { Row } from './layouts';
   import { watch, reactive, effect, defineEmits } from 'vue';
 
@@ -56,7 +56,7 @@
   </div>
   <div v-for="f in filters" class="flex flex-col gap-2">
     <Row>
-      <CheckboxInput :label="f.label" v-model="f.state"/>
+      <Checkbox :label="f.label" v-model="f.state"/>
       <div class="font-light">
         ({{ f.frequency }})
       </div>

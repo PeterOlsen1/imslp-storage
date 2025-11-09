@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { GoogleLogin, IndexCard } from '@/components'
 //@ts-ignore
-import Button from '@/components/lib/Button.vue'
+import Button from '@/components/lib/inputs/Button.vue'
 import { ref } from 'vue'
 import { useCurrentUser } from 'vuefire'
 
