@@ -2,10 +2,9 @@
 import { Sheet } from '.'
 import { Loader } from '@/components/lib'
 import type { Sheet as SheetType } from '@/types/sheet'
-import { computed, effect, watch, ref } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { Col, Row } from '@/components/layouts'
 import { Arrow } from '@/components/lib/svg'
-import type { Timestamp } from 'firebase/firestore'
 
 interface Props {
   sheets: SheetType[]
@@ -46,8 +45,8 @@ const pages = computed(() => {
 
 watch([filteredSheets, () => props.pageLen], () => {
   const maxPage = pages.value.length > 0 ? pages.value[pages.value.length - 1] : 0
-  if (pageIdx.value > maxPage) {
-    pageIdx.value = maxPage
+  if (pageIdx.value > (maxPage || 0)) {
+    pageIdx.value = maxPage || 0
   }
 })
 </script>

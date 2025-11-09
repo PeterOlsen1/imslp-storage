@@ -2,7 +2,7 @@
 import { Col, HomeLayout, Row } from '@/components/layouts'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { reactive, watch, watchEffect, ref } from 'vue'
+import { watchEffect, ref } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 import { Select } from '@/components/lib/inputs'
@@ -15,7 +15,7 @@ const sheets = ref<Sheet[]>([])
 
 watchEffect(() => {
   if (user.value?.uid) {
-    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as any
+    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as unknown as Sheet[]
   } else {
     sheets.value = []
   }
@@ -74,9 +74,9 @@ const pageLen = ref<number>(10)
               <Subtitle>filters</Subtitle>
             </Row>
             <SheetFilters
-              :data="sheets.value"
+              :data="sheets"
               :filters="filters"
-              @update="(f) => (filters.value = f || [])"
+              @update="(f) => (filters = f || [])"
             />
           </Col>
         </Col>
@@ -104,8 +104,8 @@ const pageLen = ref<number>(10)
           </Row>
           <Row class="font-light text-sm">
             <div class="flex-1">
-              <div v-if="!filters.value || filters.value.length == 0">no filters</div>
-              <div v-else>filters: {{ filters.value.join(', ') }}</div>
+              <div v-if="!filters || filters.length == 0">no filters</div>
+              <div v-else>filters: {{ filters.join(', ') }}</div>
             </div>
             <Row class="w-auto">
               <div class="whitespace-nowrap">sheets per page</div>
@@ -122,8 +122,8 @@ const pageLen = ref<number>(10)
             </Row>
           </Row>
           <SheetsDisplay
-            :sheets="sheets.value"
-            :filters="filters.value || []"
+            :sheets="sheets"
+            :filters="filters.map(f => f.label) || []"
             :page-len="pageLen"
           />
         </Col>
