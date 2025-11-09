@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { useCurrentUser } from 'vuefire'
 import { Button } from '@/components/lib/inputs'
-import { updateRecentlyViewed } from '@/scripts/db'
-import { Row } from './layouts'
+import { Row } from '@/components/layouts'
 import { ref, type PropType } from 'vue'
-import { SheetModal } from '@/components'
 import type { Sheet } from '@/types/sheet'
-import { Subtitle, Italic } from './ui'
+import { Subtitle, Italic } from '@/components/ui'
+import { ViewSheetButton } from '@/components/lib/inputs'
+import { SheetModal } from '.'
 
 const props = defineProps({
   sheet: {
@@ -15,13 +14,7 @@ const props = defineProps({
   },
 })
 
-const user = useCurrentUser()
 const expanded = ref<boolean>(false)
-
-function redirect() {
-  updateRecentlyViewed(user.value?.uid || '', props.sheet.id || '')
-  window.open(props.sheet.url, '_blank')
-}
 </script>
 
 <template>
@@ -40,7 +33,7 @@ function redirect() {
     </div>
     <Row class="flex-1 justify-end">
       <Button class="my-auto" @click="() => (expanded = true)"> Expand </Button>
-      <Button class="w-max my-auto" @click="redirect"> View Sheet </Button>
+      <ViewSheetButton :sheet="sheet" />
     </Row>
   </div>
 </template>

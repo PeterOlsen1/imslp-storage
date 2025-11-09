@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Sheet } from '@/types/sheet'
 import type { Filter } from '@/types/filter'
-import { Checkbox } from './lib/inputs'
-import { Row } from './layouts'
+import { Checkbox } from '@/components/lib/inputs'
+import { Row } from '@/components/layouts'
 import { watch, reactive, effect } from 'vue'
 
 const props = defineProps({

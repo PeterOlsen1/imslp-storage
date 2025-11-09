@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //@ts-ignore
 import IndexView from '@views/IndexView.vue'
 //@ts-ignore
-import HomeView from '@views/HomeView.vue'
+import HomeView from '@views/home/HomeView.vue'
 import InvalidView from '@/views/InvalidView.vue'
 import { useCurrentUser } from 'vuefire'
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Sheet } from '.'
-import { Loader } from './lib'
+import { Loader } from '@/components/lib'
 import type { Sheet as SheetType } from '@/types/sheet'
 import { computed, effect, watch, ref } from 'vue'
-import { Col, Row } from './layouts'
-import { Arrow } from './lib/svg'
+import { Col, Row } from '@/components/layouts'
+import { Arrow } from '@/components/lib/svg'
 
 interface Props {
   sheets: SheetType[]

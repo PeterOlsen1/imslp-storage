@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Col, HomeLayout, Row } from '@/components/layouts'
-import { AddSheetForm, SheetFilters, SheetsDisplay } from '@/components'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
 import { reactive, watch, watchEffect, ref } from 'vue'
@@ -8,6 +7,7 @@ import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 import { Select } from '@/components/lib/inputs'
 import { Title, Subtitle } from '@/components/ui'
+import { AddSheetForm, SheetFilters, SheetsDisplay } from './components'
 
 const user = useCurrentUser()
 const sheets = ref<Sheet[]>([])
@@ -106,7 +106,7 @@ const pageLen = ref<number>(10)
               <div v-if="!filters.value || filters.value.length == 0">no filters</div>
               <div v-else>filters: {{ filters.value.join(', ') }}</div>
             </div>
-            <Row>
+            <Row class="w-auto">
               <div class="whitespace-nowrap">sheets per page</div>
               <Select
                 @change="

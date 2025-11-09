@@ -1,4 +1,7 @@
 <script setup>
+import { twMerge } from 'tailwind-merge'
+import { useAttrs, computed } from 'vue'
+
 const props = defineProps({
   gap: {
     required: false,
@@ -6,10 +9,13 @@ const props = defineProps({
     type: String,
   },
 })
+
+const attrs = useAttrs()
+const merged = computed(() => twMerge(`flex flex-col w-full gap-${props.gap}`, attrs.class))
 </script>
 
 <template>
-  <div :class="`flex flex-col gap-${props.gap}`">
+  <div :class="merged">
     <slot></slot>
   </div>
 </template>

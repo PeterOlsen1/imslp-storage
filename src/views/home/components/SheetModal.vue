@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, type PropType } from 'vue'
-import { Subtitle, Italic } from './ui'
+import { Subtitle, Italic } from '@/components/ui'
 import type { Sheet } from '@/types/sheet'
-import { Col } from './layouts'
+import { Col, Row } from '@/components/layouts'
+import { ViewSheetButton } from '@/components/lib/inputs'
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
@@ -28,14 +29,21 @@ const emit = defineEmits(['closed'])
     style="background-color: rgba(150, 150, 150, 0.4)"
     @click="() => emit('closed')"
   >
-    <Col class="p-24 bg-white rounded z-51 place-items-start" @click.stop>
-      <Col gap="0">
-        <Subtitle>
-          {{ sheet.title }}
-        </Subtitle>
-        <Small>
-          {{ sheet.composer }}
-        </Small>
+    <Col class="w-[50vw] h-[50vh] p-4 bg-white rounded z-51 place-items-start" @click.stop>
+      <Col>
+        <Row>
+          <Col gap="0">
+            <Subtitle>
+              {{ sheet.title }}
+            </Subtitle>
+            <Small>
+              {{ sheet.composer }}
+            </Small>
+          </Col>
+          <div class="flex-1">
+            <ViewSheetButton :sheet="sheet" />
+          </div>
+        </Row>
       </Col>
     </Col>
   </div>
