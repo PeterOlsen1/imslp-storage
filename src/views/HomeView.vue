@@ -6,6 +6,7 @@ import { getUserSheetsCollection } from '@/scripts/db'
 import { reactive, watch, watchEffect, ref } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
+import { Select } from '@/components/lib/inputs'
 
 const user = useCurrentUser()
 const sheets = ref<Sheet[]>([])
@@ -19,6 +20,7 @@ watchEffect(() => {
 })
 
 const filters = ref<Filter[]>([]);
+const pageLen = ref<number>(10);
 </script>
 
 <template>
@@ -96,14 +98,26 @@ const filters = ref<Filter[]>([]);
             <h2 class="text-xl font-semibold">your sheets</h2>
           </Row>
           <Row class="font-light">
-            <div v-if="!filters.value || filters.value.length == 0">
-              no filters
+            <div class="flex-1">
+              <div v-if="!filters.value || filters.value.length == 0">
+                no filters
+              </div>
+              <div v-else>
+                filters: {{ filters.value.join(', ') }}
+              </div>
             </div>
-            <div v-else>
-              filters: {{ filters.value.join(', ') }}
+            <div>
+              <Select
+                @change="(e: Event) => pageLen = Number((e.target as HTMLSelectElement).value) || 10"
+                :value="pageLen"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+              </Select>
             </div>
           </Row>
-          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" :page-len=3 />
+          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" :page-len=pageLen />
         </Col>
       </HomeLayout>
     </div>

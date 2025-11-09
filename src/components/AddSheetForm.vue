@@ -1,5 +1,5 @@
 <script setup>
-import TextInput from './lib/TextInput.vue'
+import TextInput from './lib/inputs/TextInput.vue'
 import Button from './lib/Button.vue'
 import { reactive } from 'vue'
 import { useCurrentUser } from 'vuefire'

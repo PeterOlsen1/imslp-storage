@@ -2,7 +2,7 @@
 import { Sheet } from '.';
 import { Loader } from './lib';
 import type { Sheet as SheetType } from '@/types/sheet';
-import { computed, effect, ref } from 'vue';
+import { computed, effect, watch, ref } from 'vue';
 import { Col, Row } from './layouts';
 import { Arrow } from './lib/svg';
 
@@ -28,11 +28,18 @@ const pagedSheets = computed(() => {
 let pageIdx = ref(0);
 const pages = computed(() => {
   const out = [];
-  for (let i = 0; i < (props.sheets.length / props.pageLen); i++) {
+  for (let i = 0; i < (filteredSheets.value.length / props.pageLen); i++) {
     out.push(i);
   }
   return out;
 })
+
+watch([filteredSheets, () => props.pageLen], () => {
+  const maxPage = pages.value.length > 0 ? pages.value[pages.value.length - 1] : 0;
+  if (pageIdx.value > maxPage) {
+    pageIdx.value = maxPage;
+  }
+});
 </script>
 
 <template>
