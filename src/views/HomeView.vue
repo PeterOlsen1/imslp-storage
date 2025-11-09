@@ -7,6 +7,7 @@ import { reactive, watch, watchEffect, ref } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 import { Select } from '@/components/lib/inputs'
+import { Title, Subtitle } from '@/components/ui'
 
 const user = useCurrentUser()
 const sheets = ref<Sheet[]>([])
@@ -26,9 +27,9 @@ const pageLen = ref<number>(10);
 <template>
   <div class="w-screen min-h-screen flex flex-col align-center overflow-x-hidden">
     <div class="mt-16 mx-8">
-      <div class="font-semibold text-3xl mb-12">
+      <Title class="mb-12">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}
-      </div>
+      </Title>
       <div>
       </div>
       <HomeLayout>
@@ -47,7 +48,7 @@ const pageLen = ref<number>(10);
                   d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 11 L 7 11 L 7 13 L 11 13 L 11 17 L 13 17 L 13 13 L 17 13 L 17 11 L 13 11 L 13 7 L 11 7 z"
                 ></path>
               </svg>
-              <h2 class="text-xl font-semibold">add new sheet</h2>
+              <Subtitle>add new sheet</Subtitle>
             </Row>
             <AddSheetForm />
           </Col>
@@ -70,7 +71,7 @@ const pageLen = ref<number>(10);
                 <title id="filterIconTitle">Filter</title>
                 <path d="M10 12.261L4.028 3.972h16L14 12.329V17l-4 3z" />
               </svg>
-              <h2 class="text-xl font-semibold">filters</h2>
+              <Subtitle>filters</Subtitle>
             </Row>
             <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters.value = f || []"/>
           </Col>
@@ -95,7 +96,7 @@ const pageLen = ref<number>(10);
                 />
               </g>
             </svg>
-            <h2 class="text-xl font-semibold">your sheets</h2>
+            <Subtitle>your sheets</Subtitle>
           </Row>
           <Row class="font-light text-sm">
             <div class="flex-1">

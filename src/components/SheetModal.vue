@@ -25,11 +25,11 @@
         style="background-color: rgba(150, 150, 150, 0.4)"
         @click="() => emit('closed')"
     >
-        <Col class="p-24 bg-white rounded z-51"
+        <Col class="p-24 bg-white rounded z-51 place-items-start"
             @click.stop
         >
             <div>
-
+                hello, modal
             </div>
         </Col>
     </div>
