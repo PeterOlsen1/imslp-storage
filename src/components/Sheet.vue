@@ -1,5 +1,7 @@
 <script setup>
+import { useCurrentUser } from 'vuefire';
 import Button from './lib/Button.vue'
+import { updateRecentlyViewed } from '@/scripts/db';
 
 const props = defineProps({
   title: {
@@ -14,10 +16,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  id: {
+    type: String,
+    required: true,
+  }
 });
 
+const user = useCurrentUser();
+
 function redirect() {
-  window.open(props.url, '_blank')
+  updateRecentlyViewed(user.value.uid, props.id);
+  window.open(props.url, '_blank');
 }
 </script>
 

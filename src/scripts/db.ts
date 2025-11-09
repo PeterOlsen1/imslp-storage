@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from 'firebase/firestore'
+import { collection, addDoc, getDocs, doc, getDoc, setDoc } from 'firebase/firestore'
 import { usersRef } from './firebase'
 import type { Sheet } from '@/types/sheet'
 
@@ -21,7 +21,10 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
   }
   
   try {
-    const docRef = await addDoc(userSheetsRef, sheetData)
+    const docRef = await addDoc(userSheetsRef, {
+      ...sheetData,
+      lastAccessed: new Date(),
+    });
     return docRef
   } catch (e) {
     console.error('Error adding document: ', e)
@@ -42,4 +45,28 @@ export async function getUserSheets(userId: string): Promise<Sheet[]|null> {
   })
 
   return out
+}
+
+export async function updateRecentlyViewed(userId: string, sheetId: string) {
+  const userSheetsRef = getUserSheetsCollection(userId);
+  if (!userSheetsRef) {
+    return null;
+  }
+
+  const docRef = doc(userSheetsRef, sheetId);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()) {
+    const data = snapshot.data();
+    try {
+      await setDoc(docRef, {
+        ...data,
+        lastAccessed: new Date(),
+      });
+    }
+    catch {
+      console.error("Error setting last accessed time!")
+    }
+  } else {
+    console.error("Error finding sheet document!");
+  }
 }

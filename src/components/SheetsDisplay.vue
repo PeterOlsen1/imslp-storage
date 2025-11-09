@@ -49,7 +49,7 @@ watch([filteredSheets, () => props.pageLen], () => {
   <div v-else>
     <Col gap="4" class="pb-6">
       <div v-for="sheet in pagedSheets" :key="sheet.id">
-        <Sheet :title="sheet.title" :composer="sheet.composer" :url="sheet.url" />
+        <Sheet :title="sheet.title" :composer="sheet.composer" :url="sheet.url" :id="sheet.id"/>
       </div>
 
       <!-- page selector -->
