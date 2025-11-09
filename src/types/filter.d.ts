@@ -1,5 +1,5 @@
 export interface Filter {
-    state: Boolean;
-    label: string;
-    frequency: number;
+  state: Boolean
+  label: string
+  frequency: number
 }

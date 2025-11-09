@@ -43,11 +43,7 @@ defineProps({
     @mouseover="onOver"
     @mouseout="onOut"
   >
-    <a
-      :href="url"
-      target="_blank"
-      class="flex gap-2 items-center"
-    >
+    <a :href="url" target="_blank" class="flex gap-2 items-center">
       <img :src="img" :alt="name" width="20" height="17" class="filter invert" />
       <div class="name-text" ref="nameTextRef">
         {{ name }}

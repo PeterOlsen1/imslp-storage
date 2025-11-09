@@ -20,29 +20,29 @@ const handleSubmit = async () => {
   }
 
   if (!form.title || !form.composer || !form.url) {
-    const missing = [];
-    if (!form.title) missing.push("Title");
-    if (!form.composer) missing.push("Composer");
-    if (!form.url) missing.push("Url");
-  
+    const missing = []
+    if (!form.title) missing.push('Title')
+    if (!form.composer) missing.push('Composer')
+    if (!form.url) missing.push('Url')
+
     fireErrorToast({
-      text: `Missing required inputs: ${missing.join(', ')}`
-    });
+      text: `Missing required inputs: ${missing.join(', ')}`,
+    })
   }
 
   const res = await addUserSheet(user.value.uid, { ...form })
   if (!res) {
-    console.error("sheet add failed");
+    console.error('sheet add failed')
     fireErrorToast({
-      text: "Unexpected error adding sheet. Try again later"
-    });
+      text: 'Unexpected error adding sheet. Try again later',
+    })
   } else {
     form.title = ''
     form.composer = ''
     form.url = ''
     fireSuccessToast({
-      text: "Sheet added successfully"
-    });
+      text: 'Sheet added successfully',
+    })
   }
 }
 </script>

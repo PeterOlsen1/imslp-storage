@@ -1,3 +1,3 @@
-import Arrow from "./Arrow.vue";
+import Arrow from './Arrow.vue'
 
-export { Arrow };
+export { Arrow }

@@ -6,7 +6,7 @@ defineProps({
   },
 })
 
-const model = defineModel();
+const model = defineModel()
 </script>
 
 <template>

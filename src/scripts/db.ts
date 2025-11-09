@@ -4,7 +4,7 @@ import type { Sheet } from '@/types/sheet'
 
 export function getUserSheetsCollection(userId: string) {
   if (!userId) {
-    return null;
+    return null
   }
   return collection(usersRef, userId, 'sheets')
 }
@@ -12,19 +12,19 @@ export function getUserSheetsCollection(userId: string) {
 export async function addUserSheet(userId: string, sheetData: Sheet) {
   const userSheetsRef = getUserSheetsCollection(userId)
   if (!userSheetsRef) {
-    return null;
+    return null
   }
 
   if (!sheetData.composer || !sheetData.title || !sheetData.url) {
-    console.error("Missing data!");
-    return null;
+    console.error('Missing data!')
+    return null
   }
-  
+
   try {
     const docRef = await addDoc(userSheetsRef, {
       ...sheetData,
       lastAccessed: new Date(),
-    });
+    })
     return docRef
   } catch (e) {
     console.error('Error adding document: ', e)
@@ -32,10 +32,10 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
   }
 }
 
-export async function getUserSheets(userId: string): Promise<Sheet[]|null> {
-  const userSheetsRef = getUserSheetsCollection(userId);
+export async function getUserSheets(userId: string): Promise<Sheet[] | null> {
+  const userSheetsRef = getUserSheetsCollection(userId)
   if (!userSheetsRef) {
-    return null;
+    return null
   }
 
   const out: Sheet[] = []
@@ -48,25 +48,24 @@ export async function getUserSheets(userId: string): Promise<Sheet[]|null> {
 }
 
 export async function updateRecentlyViewed(userId: string, sheetId: string) {
-  const userSheetsRef = getUserSheetsCollection(userId);
+  const userSheetsRef = getUserSheetsCollection(userId)
   if (!userSheetsRef) {
-    return null;
+    return null
   }
 
-  const docRef = doc(userSheetsRef, sheetId);
-  const snapshot = await getDoc(docRef);
+  const docRef = doc(userSheetsRef, sheetId)
+  const snapshot = await getDoc(docRef)
   if (snapshot.exists()) {
-    const data = snapshot.data();
+    const data = snapshot.data()
     try {
       await setDoc(docRef, {
         ...data,
         lastAccessed: new Date(),
-      });
-    }
-    catch {
-      console.error("Error setting last accessed time!")
+      })
+    } catch {
+      console.error('Error setting last accessed time!')
     }
   } else {
-    console.error("Error finding sheet document!");
+    console.error('Error finding sheet document!')
   }
 }

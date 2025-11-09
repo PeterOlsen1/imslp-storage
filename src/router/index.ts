@@ -24,7 +24,7 @@ const router = createRouter({
     // {
     //   path: '/sheet/:id',
     //   name: 'sheet-detail',
-    //   component: SheetDetailView, 
+    //   component: SheetDetailView,
     //   children: [
     //      {
     //        path: 'profile',
@@ -36,23 +36,24 @@ const router = createRouter({
     //      },
     //    ]
     // },
-    { // vue 404
+    {
+      // vue 404
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: InvalidView,
-    }
+    },
   ],
 })
 
 // use this to auth check, not quite correct yet
 router.beforeEach((to, from) => {
-  const user = useCurrentUser();
+  const user = useCurrentUser()
 
   if (!user) {
-    return false;
+    return false
   }
-  
-  return true;
+
+  return true
 })
 
 export default router

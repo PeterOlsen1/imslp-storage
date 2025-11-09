@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
 import Footer from './components/Footer.vue'
-import Header from './components/Header.vue';
+import Header from './components/Header.vue'
 
-const route = useRoute();
+const route = useRoute()
 </script>
 
 <template>

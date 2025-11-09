@@ -14,14 +14,14 @@ const sheets = ref<Sheet[]>([])
 
 watchEffect(() => {
   if (user.value?.uid) {
-    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as any;
+    sheets.value = useCollection(getUserSheetsCollection(user.value.uid)) as any
   } else {
     sheets.value = []
   }
 })
 
-const filters = ref<Filter[]>([]);
-const pageLen = ref<number>(10);
+const filters = ref<Filter[]>([])
+const pageLen = ref<number>(10)
 </script>
 
 <template>
@@ -30,8 +30,7 @@ const pageLen = ref<number>(10);
       <Title class="mb-12">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}
       </Title>
-      <div>
-      </div>
+      <div></div>
       <HomeLayout>
         <Col gap="4" class="min-w-48">
           <Col>
@@ -73,7 +72,11 @@ const pageLen = ref<number>(10);
               </svg>
               <Subtitle>filters</Subtitle>
             </Row>
-            <SheetFilters :data="sheets.value" :filters="filters" @update="(f) => filters.value = f || []"/>
+            <SheetFilters
+              :data="sheets.value"
+              :filters="filters"
+              @update="(f) => (filters.value = f || [])"
+            />
           </Col>
         </Col>
         <Col gap="4" class="flex-1 max-w-4xl">
@@ -100,19 +103,15 @@ const pageLen = ref<number>(10);
           </Row>
           <Row class="font-light text-sm">
             <div class="flex-1">
-              <div v-if="!filters.value || filters.value.length == 0">
-                no filters
-              </div>
-              <div v-else>
-                filters: {{ filters.value.join(', ') }}
-              </div>
+              <div v-if="!filters.value || filters.value.length == 0">no filters</div>
+              <div v-else>filters: {{ filters.value.join(', ') }}</div>
             </div>
             <Row>
-              <div class="whitespace-nowrap">
-                sheets per page
-              </div>
+              <div class="whitespace-nowrap">sheets per page</div>
               <Select
-                @change="(e: Event) => pageLen = Number((e.target as HTMLSelectElement).value) || 10"
+                @change="
+                  (e: Event) => (pageLen = Number((e.target as HTMLSelectElement).value) || 10)
+                "
                 :value="pageLen"
               >
                 <option value="5">5</option>
@@ -121,7 +120,11 @@ const pageLen = ref<number>(10);
               </Select>
             </Row>
           </Row>
-          <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" :page-len=pageLen />
+          <SheetsDisplay
+            :sheets="sheets.value"
+            :filters="filters.value || []"
+            :page-len="pageLen"
+          />
         </Col>
       </HomeLayout>
     </div>

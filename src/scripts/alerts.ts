@@ -1,39 +1,33 @@
 import Swal from 'sweetalert2'
 
-export function fireErrorToast(input: {
-    title?: string,
-    text?: string
-}) {
-    Swal.fire({
-      toast: true,
-      icon: 'error',
-      title: input.title,
-      text: input.text,
-      position: 'bottom-right',
-      timer: 2000,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      showCloseButton: true,
-      background: '#ed3737',
-      color: '#fff',
-    });
+export function fireErrorToast(input: { title?: string; text?: string }) {
+  Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: input.title,
+    text: input.text,
+    position: 'bottom-right',
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showCloseButton: true,
+    background: '#ed3737',
+    color: '#fff',
+  })
 }
 
-export function fireSuccessToast(input: {
-    title?: string,
-    text?: string
-}) {
-    Swal.fire({
-      toast: true,
-      icon: 'success',
-      title: input.title,
-      text: input.text,
-      position: 'bottom-right',
-      timer: 2000,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      showCloseButton: true,
-      closeButtonHtml: `
+export function fireSuccessToast(input: { title?: string; text?: string }) {
+  Swal.fire({
+    toast: true,
+    icon: 'success',
+    title: input.title,
+    text: input.text,
+    position: 'bottom-right',
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    showCloseButton: true,
+    closeButtonHtml: `
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -49,8 +43,7 @@ export function fireSuccessToast(input: {
           <line x1="19" y1="5" x2="5" y2="19" />
       </svg>
       `,
-      background: 'var(--alt-tertiary-gradient)',
-      color: '#fff',
-      
-    });
+    background: 'var(--alt-tertiary-gradient)',
+    color: '#fff',
+  })
 }
