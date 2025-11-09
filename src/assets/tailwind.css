@@ -12,6 +12,8 @@
   --secondary-gradient: linear-gradient(30deg, #a3c4d7 0%, #e1ebf0 100%);
   --tertiary-gradient: linear-gradient(330deg, #b8dcc1 0%, #e6f0e6 100%);
   --footer-gradient: linear-gradient(120deg, #27303d 0%, #343c4a 100%);
+
+  --alt-tertiary-gradient: linear-gradient(70deg, #93cca1 0%, #8ed19f 100%);
 }
 
 @function --secondary-gradient-custom($angle) {

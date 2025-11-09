@@ -4,7 +4,6 @@ import Button from './lib/Button.vue'
 import { reactive } from 'vue'
 import { useCurrentUser } from 'vuefire'
 import { addUserSheet } from '@/scripts/db'
-import Swal from 'sweetalert2'
 import { fireErrorToast, fireSuccessToast } from '@/scripts/alerts'
 
 const user = useCurrentUser()

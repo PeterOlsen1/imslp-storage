@@ -4,6 +4,10 @@
   font-family: 'Inter', 'sans-serif';
 }
 
+.swal2-timer-progress-bar {
+  background: rgba(255, 255, 255, 0.54) !important; 
+}
+
 .inter {
   font-family: 'Inter', 'sans-serif';
 }

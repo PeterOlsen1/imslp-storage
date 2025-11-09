@@ -97,7 +97,7 @@ const pageLen = ref<number>(10);
             </svg>
             <h2 class="text-xl font-semibold">your sheets</h2>
           </Row>
-          <Row class="font-light">
+          <Row class="font-light text-sm">
             <div class="flex-1">
               <div v-if="!filters.value || filters.value.length == 0">
                 no filters
@@ -106,7 +106,10 @@ const pageLen = ref<number>(10);
                 filters: {{ filters.value.join(', ') }}
               </div>
             </div>
-            <div>
+            <Row>
+              <div class="whitespace-nowrap">
+                sheets per page
+              </div>
               <Select
                 @change="(e: Event) => pageLen = Number((e.target as HTMLSelectElement).value) || 10"
                 :value="pageLen"
@@ -115,7 +118,7 @@ const pageLen = ref<number>(10);
                 <option value="10">10</option>
                 <option value="25">25</option>
               </Select>
-            </div>
+            </Row>
           </Row>
           <SheetsDisplay :sheets="sheets.value" :filters="filters.value || []" :page-len=pageLen />
         </Col>
