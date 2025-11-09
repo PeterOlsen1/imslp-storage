@@ -3,4 +3,5 @@ export interface Sheet {
   title: string
   composer: string
   url: string
+  lastAccessed?: Date
 }
