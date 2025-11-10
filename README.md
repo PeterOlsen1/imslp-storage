@@ -3,5 +3,6 @@
 Developed to store links to IMSLP pages in a consistent place.
 
 TODO:
-* Sort homepage by last accessed
-* Mobile / ipad view
+* Display last accessed?
+* Mobile / ipad view (header, sheets / page)
+* Home layout is weird on large screens
