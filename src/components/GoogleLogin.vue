@@ -20,7 +20,7 @@ const handleClick = async () => {
 </script>
 
 <template>
-  <button type="button" class="login-with-google-btn" @click="handleClick">
+  <button type="button" class="mx-auto login-with-google-btn" @click="handleClick">
     Sign in with Google
   </button>
 </template>

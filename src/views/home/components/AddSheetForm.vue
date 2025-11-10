@@ -46,7 +46,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2 mx-8 sm:ml-8 sm:mr-0">
     <TextInput v-model="form.title" label="Title" />
     <TextInput v-model="form.composer" label="Composer" />
     <TextInput v-model="form.url" label="URL" type="url" @keyup.enter="handleSubmit" />

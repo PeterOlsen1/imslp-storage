@@ -21,7 +21,7 @@ const expanded = ref<boolean>(false)
   <SheetModal v-if="expanded" @closed="() => (expanded = false)" :sheet="props.sheet" />
   <div
     style="background: var(--tertiary-gradient)"
-    class="flex p-4 rounded-md shadow-md gap-6 justify-center"
+    class="flex p-4 sm:rounded-md shadow-md gap-6 justify-center w-screen sm:w-full"
   >
     <div class="flex flex-col gap-2">
       <Subtitle class="poppins">

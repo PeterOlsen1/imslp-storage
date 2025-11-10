@@ -100,17 +100,15 @@ const user = useCurrentUser()
       style="background: var(--tertiary-gradient)"
       ref="scrollToDiv"
     >
-      <div v-if="user">
-        <div class="flex justify-center flex-col gap-4 text-center">
-          <div class="text-3xl poppins">Return home and resume your journey</div>
-          <router-link to="/home" class="mx-auto">
-            <Button> Home </Button>
-          </router-link>
-        </div>
+      <div v-if="user" class="flex justify-center flex-col gap-4 text-center">
+        <div class="text-3xl poppins">Return home and resume your journey</div>
+        <router-link to="/home" class="mx-auto">
+          <Button> Home </Button>
+        </router-link>
       </div>
-      <div v-else>
+      <div v-else class="flex justify-center flex-col gap-4 text-center">
         <div class="text-3xl poppins">Sign in with Google to get started</div>
-        <GoogleLogin />
+        <GoogleLogin class="w-auto"/>
       </div>
     </div>
   </div>
