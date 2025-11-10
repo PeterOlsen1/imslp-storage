@@ -1,5 +1,11 @@
 <script setup>
-import Button from './lib/inputs/Button.vue'
+import Button from './lib/inputs/Button.vue';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/scripts/firebase';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 </script>
 
 <template>
@@ -12,7 +18,14 @@ import Button from './lib/inputs/Button.vue'
       </span>
     </router-link>
     <div class="flex-1 text-center poppins text-lg self-center flex justify-end pr-8 gap-4">
-      <Button> Log Out </Button>
+      <Button
+        @click="() => {
+          signOut(auth);
+          router.push('/');
+        }"
+      > 
+        Log Out 
+      </Button>
       <Button> Profile </Button>
     </div>
   </div>
