@@ -32,7 +32,7 @@ const expanded = ref<boolean>(false)
       </Italic>
     </div>
     <Row class="flex-1 justify-end">
-      <Button class="my-auto" @click="() => (expanded = true)"> Expand </Button>
+      <Button class="my-auto" @click="() => (expanded = true)"> Edit </Button>
       <ViewSheetButton :sheet="sheet" />
     </Row>
   </div>

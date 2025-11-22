@@ -14,25 +14,25 @@ interface Props {
 const props = defineProps<Props>()
 
 const filteredSheets = computed(() => {
-  let result = Array.isArray(props.sheets) ? props.sheets : [];
+  let result = Array.isArray(props.sheets) ? props.sheets : []
   if (props.filters && props.filters.length) {
-    result = result.filter((sheet) => props.filters.includes(sheet.composer));
+    result = result.filter((sheet) => props.filters.includes(sheet.composer))
   }
 
   return result.slice().sort((a, b) => {
     //@ts-ignore
-    const aTime = a.lastAccessed ? a.lastAccessed.toDate().getTime() : 0;
+    const aTime = a.lastAccessed ? a.lastAccessed.toDate().getTime() : 0
     //@ts-ignore
-    const bTime = b.lastAccessed ? b.lastAccessed.toDate().getTime() : 0;
-    return bTime - aTime;
-  });
-});
+    const bTime = b.lastAccessed ? b.lastAccessed.toDate().getTime() : 0
+    return bTime - aTime
+  })
+})
 
 const pagedSheets = computed(() => {
   const start = pageIdx.value * props.pageLen
   const end = start + props.pageLen
   return filteredSheets.value.slice(start, end)
-});
+})
 
 let pageIdx = ref(0)
 const pages = computed(() => {
@@ -41,7 +41,7 @@ const pages = computed(() => {
     out.push(i)
   }
   return out
-});
+})
 
 watch([filteredSheets, () => props.pageLen], () => {
   const maxPage = pages.value.length > 0 ? pages.value[pages.value.length - 1] : 0

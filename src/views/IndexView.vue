@@ -108,7 +108,7 @@ const user = useCurrentUser()
       </div>
       <div v-else class="flex justify-center flex-col gap-4 text-center">
         <div class="text-3xl poppins">Sign in with Google to get started</div>
-        <GoogleLogin class="w-auto"/>
+        <GoogleLogin class="w-auto" />
       </div>
     </div>
   </div>

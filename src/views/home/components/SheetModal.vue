@@ -94,7 +94,11 @@ async function handleDelete() {
     style="background-color: rgba(150, 150, 150, 0.4)"
     @click="() => emit('closed')"
   >
-    <Col gap="4" class="w-[100vw] sm:w-[50vw] min-h-[50vh] p-4 bg-white sm:rounded z-51 place-items-start" @click.stop>
+    <Col
+      gap="4"
+      class="w-[100vw] sm:w-[50vw] min-h-[30vh] p-4 py-8 sm:py-4 bg-white sm:rounded z-51 place-items-start"
+      @click.stop
+    >
       <Row>
         <Col gap="0">
           <Subtitle>
