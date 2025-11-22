@@ -28,7 +28,7 @@ const router = useRouter()
       >
         Log Out
       </Button>
-      <Button> Profile </Button>
+      <!-- <Button> Profile </Button> -->
     </div>
   </div>
 </template>

@@ -32,21 +32,6 @@ export async function addUserSheet(userId: string, sheetData: Sheet) {
   }
 }
 
-export async function getUserSheets(userId: string): Promise<Sheet[] | null> {
-  const userSheetsRef = getUserSheetsCollection(userId)
-  if (!userSheetsRef) {
-    return null
-  }
-
-  const out: Sheet[] = []
-  const docs = await getDocs(userSheetsRef)
-  docs.forEach((d) => {
-    console.log(d)
-  })
-
-  return out
-}
-
 export async function updateSheet(userId: string, sheetId: string, data: Sheet) {
   const userSheetsRef = getUserSheetsCollection(userId)
   if (!userSheetsRef) {
