@@ -13,9 +13,7 @@ const router = useRouter()
       <img src="/favicon.png" alt="treble clef" class="h-12 mr-2 sm:mr-4" />
       <span class="text-2xl poppins self-center">
         <span class="font-semibold"> IMSLP </span>
-        <br 
-          class="sm:hidden"
-        />
+        <br class="sm:hidden" />
         Storage
       </span>
     </router-link>
@@ -30,8 +28,7 @@ const router = useRouter()
       >
         Log Out
       </Button>
-      <Button
-      > Profile </Button>  
+      <Button> Profile </Button>
     </div>
   </div>
 </template>

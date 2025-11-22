@@ -43,7 +43,7 @@ effect(() => {
 watch(filters, () => {
   emit(
     'update',
-    filters.filter((f) => f.state).map((f) => f.label),
+    filters.filter((f) => f.state),
   )
 })
 </script>
