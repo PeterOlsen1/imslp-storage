@@ -2,7 +2,7 @@
 import { Col, HomeLayout, Row } from '@/components/layouts'
 import { useCurrentUser, useCollection } from 'vuefire'
 import { getUserSheetsCollection } from '@/scripts/db'
-import { watchEffect, ref, toValue } from 'vue'
+import { watchEffect, ref, toValue, onMounted, onUnmounted } from 'vue'
 import type { Filter } from '@/types/filter'
 import type { Sheet } from '@/types/sheet'
 import { Select } from '@/components/lib/inputs'
@@ -19,6 +19,25 @@ watchEffect(() => {
   } else {
     sheets.value = []
   }
+})
+
+function handleWindowResize() {
+  if (window.innerWidth > 640) {
+    formExpanded.value = true;
+    filtersExpanded.value = true;
+  }
+}
+
+onMounted(() => {
+  if (window.innerWidth > 640) {
+    formExpanded.value = true;
+    filtersExpanded.value = true;
+  }
+  window.addEventListener('resize', handleWindowResize);
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleWindowResize);
 })
 
 const formExpanded = ref<boolean>(false);
