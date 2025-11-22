@@ -23,31 +23,31 @@ watchEffect(() => {
 
 function handleWindowResize() {
   if (window.innerWidth > 640) {
-    formExpanded.value = true;
-    filtersExpanded.value = true;
+    formExpanded.value = true
+    filtersExpanded.value = true
   }
 }
 
 onMounted(() => {
   if (window.innerWidth > 640) {
-    formExpanded.value = true;
-    filtersExpanded.value = true;
+    formExpanded.value = true
+    filtersExpanded.value = true
   }
-  window.addEventListener('resize', handleWindowResize);
+  window.addEventListener('resize', handleWindowResize)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', handleWindowResize);
+  window.removeEventListener('resize', handleWindowResize)
 })
 
-const formExpanded = ref<boolean>(false);
+const formExpanded = ref<boolean>(false)
 function expandForm() {
-  formExpanded.value = !formExpanded.value;
+  formExpanded.value = !formExpanded.value
 }
 
-const filtersExpanded = ref<boolean>(false);
+const filtersExpanded = ref<boolean>(false)
 function expandFilters() {
-  filtersExpanded.value = !filtersExpanded.value;
+  filtersExpanded.value = !filtersExpanded.value
 }
 
 const filters = ref<Filter[]>([])
@@ -79,13 +79,13 @@ const pageLen = ref<number>(10)
               </svg>
               <Subtitle>add new sheet</Subtitle>
               <div class="flex-1 flex justify-end sm:hidden">
-                <Arrow 
+                <Arrow
                   :class="`${formExpanded ? 'rotate-270' : 'rotate-90'} cursor-pointer transition-transform duration-200`"
                   @click="expandForm"
                 />
               </div>
             </Row>
-            <AddSheetForm :class="`${formExpanded ? 'h-auto' : 'h-0 hidden'}`"/>
+            <AddSheetForm :class="`${formExpanded ? 'h-auto' : 'h-0 hidden'}`" />
           </Col>
           <Col>
             <Row class="mb-1">
@@ -108,7 +108,7 @@ const pageLen = ref<number>(10)
               </svg>
               <Subtitle>filters</Subtitle>
               <div class="flex-1 flex justify-end sm:hidden">
-                <Arrow 
+                <Arrow
                   :class="`${filtersExpanded ? 'rotate-270' : 'rotate-90'} cursor-pointer transition-transform duration-200`"
                   @click="expandFilters"
                 />
@@ -149,7 +149,7 @@ const pageLen = ref<number>(10)
           <Row class="font-light text-sm">
             <div class="flex-1">
               <div v-if="!filters || filters.length == 0">no filters</div>
-              <div v-else>filters: {{ filters.join(', ') }}</div>
+              <div v-else>filters: {{ filters.map((f) => f.label).join(', ') }}</div>
             </div>
             <Row class="w-auto">
               <div class="whitespace-nowrap">sheets per page</div>

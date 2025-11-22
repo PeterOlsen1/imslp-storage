@@ -14,6 +14,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const filteredSheets = computed(() => {
+  console.log(props.filters)
   let result = Array.isArray(props.sheets) ? props.sheets : []
   if (props.filters && props.filters.length) {
     result = result.filter((sheet) => props.filters.includes(sheet.composer))
