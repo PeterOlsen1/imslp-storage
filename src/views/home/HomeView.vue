@@ -28,7 +28,7 @@ const margin = 8;
 
 <template>
   <div class="w-screen min-h-screen flex flex-col align-center overflow-x-hidden">
-    <div class="mt-16">
+    <div class="mt-16 md:ml-8">
       <Title :class="`mb-12 ml-${margin}`">
         welcome back{{ user ? ', ' + user.displayName?.split(' ')[0] + '!' : '!' }}
       </Title>
@@ -36,7 +36,7 @@ const margin = 8;
       <HomeLayout>
         <Col gap="4" class="sm:min-w-48">
           <Col>
-            <Row :class="`ml-${margin} mb-4`">
+            <Row class="mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -53,7 +53,7 @@ const margin = 8;
             </Row>
             <AddSheetForm />
           </Col>
-          <Col :class="`ml-${margin}`">
+          <Col>
             <Row class="mb-1">
               <svg
                 width="20"
@@ -82,7 +82,7 @@ const margin = 8;
           </Col>
         </Col>
         <Col gap="4" class="flex-1 max-w-4xl">
-          <Row :class="`mx-${margin}`">
+          <Row>
             <svg
               fill="#000000"
               version="1.1"
@@ -103,7 +103,7 @@ const margin = 8;
             </svg>
             <Subtitle>your sheets</Subtitle>
           </Row>
-          <Row :class="`mx-${margin} font-light text-sm`">
+          <Row class="font-light text-sm">
             <div class="flex-1">
               <div v-if="!filters || filters.length == 0">no filters</div>
               <div v-else>filters: {{ filters.join(', ') }}</div>
